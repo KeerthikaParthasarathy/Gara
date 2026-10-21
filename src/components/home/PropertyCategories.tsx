@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function PropertyCategories() {
   return (
-    <section className="py-24 md:py-32 bg-charcoal border-b border-graphite-border">
+    <section className="py-24 md:py-32 bg-[#141414]/40 border-b border-graphite-border">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-gold block mb-3">

@@ -61,6 +61,7 @@ export interface Property {
   priceDisplayCustom?: string;
   location: LocationDetail;
   specs: PropertySpecs;
+  walkthroughVideo?: string;
   description: string[];
   architecturalNarrative: string;
   materials: string[];

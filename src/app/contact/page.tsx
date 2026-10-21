@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
-import { MapPin, Phone, Mail, Clock, ShieldCheck, Building } from "lucide-react";
+import { Phone, Mail, Clock, ShieldCheck, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact & Private Advisory | GARA",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const OFFICES = [
   {
-    city: "South Mumbai (Headquarters)",
+    city: "South Mumbai",
     address: "One BKC, 14th Floor, G Block, Bandra Kurla Complex",
     region: "Mumbai 400051, Maharashtra",
     phone: "+91 22 6988 5000",
@@ -46,8 +46,7 @@ const OFFICES = [
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-obsidian text-ivory pt-28 pb-32">
-      {/* Intro Header */}
+    <div className="min-h-screen bg-transparent text-ivory pt-28 pb-32">
       <section className="max-w-7xl mx-auto px-6 md:px-12 mb-20">
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-4">
@@ -56,9 +55,9 @@ export default function ContactPage() {
               Private Client Advisory
             </span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-serif text-ivory tracking-tight leading-[1.1] mb-6">
+          <h1 className="text-4xl sm:text-6xl font-serif text-ivory tracking-tight leading-[1.1] mb-6 font-light">
             Confidential <br />
-            <span className="italic font-light text-gold-soft">Consultation.</span>
+            <span className="italic font-normal text-gold-soft">Consultation.</span>
           </h1>
           <p className="text-base sm:text-lg text-ivory-muted/90 font-sans font-light leading-relaxed">
             Our Senior Managing Directors assist families, institutional principals, and sovereign investors in acquiring and curating India’s most distinguished residential holdings.
@@ -66,15 +65,13 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Main Grid: Form + Office Directory */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 mb-24">
+      <section id="schedule" className="max-w-7xl mx-auto px-6 md:px-12 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Form */}
           <div className="lg:col-span-7 bg-charcoal border border-graphite-border p-8 md:p-10 shadow-2xl">
             <div className="mb-6 pb-4 border-b border-graphite-border/70 flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-serif text-ivory">Direct Advisory Dispatch</h3>
-                <p className="text-xs text-stone-400 font-sans">
+                <h3 className="text-xl font-serif text-ivory font-light">Direct Advisory Dispatch</h3>
+                <p className="text-xs text-stone-400 font-sans mt-0.5">
                   Transmitted directly to senior client partners under strict NDA
                 </p>
               </div>
@@ -84,13 +81,12 @@ export default function ContactPage() {
             <EnquiryForm />
           </div>
 
-          {/* Right Column: Direct Lines & Service Standards */}
           <div className="lg:col-span-5 space-y-6">
             <div className="p-8 bg-charcoal border border-graphite-border">
               <span className="text-[10px] uppercase font-sans tracking-[0.2em] text-gold block mb-2">
                 Concierge Desk
               </span>
-              <h3 className="text-xl font-serif text-ivory mb-6">
+              <h3 className="text-xl font-serif text-ivory mb-6 font-light">
                 Immediate Private Access
               </h3>
 
@@ -123,7 +119,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Verification Badge Box */}
             <div className="p-6 bg-obsidian border border-graphite-border text-xs text-stone-400 space-y-3 font-sans">
               <div className="flex items-center gap-2 text-gold">
                 <ShieldCheck className="w-4 h-4" />
@@ -137,13 +132,12 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Regional Advisory Hubs Matrix */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="mb-10">
+      <section id="offices" className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="mb-10 pb-4 border-b border-graphite-border/70">
           <span className="text-[10px] uppercase font-sans tracking-[0.25em] text-gold block mb-2">
             Physical Consultancies
           </span>
-          <h2 className="text-2xl sm:text-4xl font-serif text-ivory">
+          <h2 className="text-2xl sm:text-4xl font-serif text-ivory font-light">
             Regional Advisory Desks
           </h2>
         </div>
@@ -152,7 +146,10 @@ export default function ContactPage() {
           {OFFICES.map((office) => (
             <div key={office.city} className="p-6 bg-charcoal border border-graphite-border flex flex-col justify-between">
               <div>
-                <h4 className="text-base font-serif text-ivory mb-2">{office.city}</h4>
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-base font-serif text-ivory">{office.city}</h4>
+                  <MapPin className="w-3.5 h-3.5 text-gold/60" />
+                </div>
                 <p className="text-xs text-stone-300 font-sans mb-1">{office.address}</p>
                 <p className="text-[11px] text-stone-500 font-sans mb-4">{office.region}</p>
 

@@ -12,17 +12,6 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log("[GARA Private Viewing Request]", {
-      fullName,
-      email,
-      phone,
-      preferredDate,
-      time: body.preferredTime,
-      property: body.propertyTitle,
-      chauffeur: body.chauffeurRequired,
-      timestamp: body.timestamp || new Date().toISOString(),
-    });
-
     return NextResponse.json(
       {
         success: true,
@@ -32,7 +21,6 @@ export async function POST(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("[GARA Schedule Visit API Error]", error);
     return NextResponse.json(
       { message: "Failed to process viewing appointment." },
       { status: 500 }

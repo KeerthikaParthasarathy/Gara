@@ -38,9 +38,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       if (stored) {
         setSavedIds(JSON.parse(stored));
       }
-    } catch {
-      // LocalStorage access safe catch
-    }
+    } catch {}
   }, []);
 
   const toggleSaveProperty = (id: string) => {
@@ -48,9 +46,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const next = prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id];
       try {
         localStorage.setItem("gara_saved_residences", JSON.stringify(next));
-      } catch {
-        // safe
-      }
+      } catch {}
       return next;
     });
   };

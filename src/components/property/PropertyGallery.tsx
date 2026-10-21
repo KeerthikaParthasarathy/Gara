@@ -20,7 +20,6 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  // Keyboard navigation for lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
@@ -37,7 +36,6 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lightboxOpen, images.length]);
 
-  // Lock body scroll when lightbox is open
   useEffect(() => {
     if (lightboxOpen) {
       document.body.style.overflow = "hidden";
@@ -51,9 +49,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
 
   return (
     <div className="w-full">
-      {/* Editorial Grid Gallery (1 Main Featured + 4 Supporting Tiles) */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-2.5 md:gap-3 h-[420px] sm:h-[520px] lg:h-[600px]">
-        {/* Main Hero Shot */}
         <div
           onClick={() => {
             setActiveIndex(0);
@@ -83,7 +79,6 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
           </button>
         </div>
 
-        {/* 4 Supporting Tiles */}
         {images.slice(1, 5).map((img, idx) => (
           <div
             key={idx}
@@ -111,20 +106,18 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
         ))}
       </div>
 
-      {/* Lightbox Modal */}
       {lightboxOpen && (
         <div
           className="fixed inset-0 z-50 bg-obsidian/95 backdrop-blur-xl flex flex-col justify-between p-4 md:p-8 animate-fade-in"
           role="dialog"
           aria-modal="true"
         >
-          {/* Top Bar */}
           <div className="flex items-center justify-between border-b border-graphite-border/70 pb-4">
             <div>
               <span className="text-[10px] uppercase font-sans tracking-[0.25em] text-gold block">
                 Architectural Plate {activeIndex + 1} of {images.length}
               </span>
-              <h4 className="text-sm font-serif text-ivory">{title}</h4>
+              <h4 className="text-sm font-serif text-ivory font-light">{title}</h4>
             </div>
 
             <button
@@ -136,7 +129,6 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
             </button>
           </div>
 
-          {/* Main Visual Display */}
           <div className="relative flex-1 my-4 flex items-center justify-center overflow-hidden">
             <div className="relative w-full h-full max-w-6xl max-h-[75vh]">
               <Image
@@ -149,7 +141,6 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
               />
             </div>
 
-            {/* Left / Right Nav Arrows */}
             <button
               onClick={() =>
                 setActiveIndex((prev) => (prev - 1 + images.length) % images.length)
@@ -168,9 +159,8 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
             </button>
           </div>
 
-          {/* Caption & Thumbnail Strip */}
           <div className="border-t border-graphite-border/70 pt-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-stone-400 font-sans italic text-center md:text-left">
+            <p className="text-xs text-stone-400 font-sans italic text-center md:text-left font-light">
               {images[activeIndex]?.caption || images[activeIndex]?.alt}
             </p>
 
@@ -201,3 +191,5 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
     </div>
   );
 }
+
+export default PropertyGallery;

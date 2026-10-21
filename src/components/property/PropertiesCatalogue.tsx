@@ -3,24 +3,30 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { PROPERTIES } from "@/data/properties";
-import { Property, PropertyCategory } from "@/types/property";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { useApp } from "@/context/AppContext";
-import { formatPrice } from "@/lib/utils";
 import {
   Search,
-  SlidersHorizontal,
   X,
   RotateCcw,
   LayoutGrid,
   List,
   Bookmark,
   Building,
-  MapPin,
   ChevronDown,
 } from "lucide-react";
 
-const CITIES = ["All Locations", "Goa", "Worli", "Lutyens' Delhi", "Mandwa & Awas", "Bengaluru", "Kasauli Hills", "Hyderabad", "Malabar Hill"];
+const CITIES = [
+  "All Locations",
+  "Goa",
+  "Worli",
+  "Lutyens' Delhi",
+  "Mandwa & Awas",
+  "Bengaluru",
+  "Kasauli Hills",
+  "Hyderabad",
+  "Malabar Hill",
+];
 
 const CATEGORIES_FILTER = [
   "All Archetypes",
@@ -34,7 +40,7 @@ const CATEGORIES_FILTER = [
 
 export function PropertiesCatalogue() {
   const searchParams = useSearchParams();
-  const { savedIds, currency } = useApp();
+  const { savedIds } = useApp();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCity, setSelectedCity] = useState("All Locations");
@@ -45,7 +51,6 @@ export function PropertiesCatalogue() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showSavedOnly, setShowSavedOnly] = useState(false);
 
-  // Sync with URL query params
   useEffect(() => {
     const categoryParam = searchParams.get("category");
     if (categoryParam) {
@@ -58,6 +63,8 @@ export function PropertiesCatalogue() {
     const filterParam = searchParams.get("filter");
     if (filterParam === "saved") {
       setShowSavedOnly(true);
+    } else if (filterParam === "featured") {
+      setSortBy("featured");
     }
   }, [searchParams]);
 
@@ -81,12 +88,10 @@ export function PropertiesCatalogue() {
 
   const filteredProperties = useMemo(() => {
     return PROPERTIES.filter((property) => {
-      // Saved filter
       if (showSavedOnly && !savedIds.includes(property.id)) {
         return false;
       }
 
-      // Search query
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const matchesTitle = property.title.toLowerCase().includes(query);
@@ -98,26 +103,22 @@ export function PropertiesCatalogue() {
         }
       }
 
-      // City
       if (selectedCity !== "All Locations") {
         if (!property.location.city.toLowerCase().includes(selectedCity.toLowerCase())) {
           return false;
         }
       }
 
-      // Category
       if (selectedCategory !== "All Archetypes") {
         if (property.category !== selectedCategory) {
           return false;
         }
       }
 
-      // Price tier
       if (priceTier === "under50" && property.priceInrCrores >= 50) return false;
       if (priceTier === "50to100" && (property.priceInrCrores < 50 || property.priceInrCrores > 100)) return false;
       if (priceTier === "above100" && property.priceInrCrores <= 100) return false;
 
-      // Bedrooms
       if (bedrooms === "4" && property.specs.bedrooms < 4) return false;
       if (bedrooms === "5" && property.specs.bedrooms < 5) return false;
       if (bedrooms === "6" && property.specs.bedrooms < 6) return false;
@@ -132,8 +133,7 @@ export function PropertiesCatalogue() {
   }, [searchQuery, selectedCity, selectedCategory, priceTier, bedrooms, sortBy, showSavedOnly, savedIds]);
 
   return (
-    <div className="min-h-screen bg-obsidian pt-28 pb-32">
-      {/* Header Intro */}
+    <div className="min-h-screen bg-transparent pt-28 pb-32">
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-12">
         <div className="flex items-center gap-3 mb-3">
           <span className="w-6 h-[1px] bg-gold" />
@@ -143,7 +143,7 @@ export function PropertiesCatalogue() {
         </div>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h1 className="text-4xl sm:text-6xl font-serif text-ivory tracking-tight">
+            <h1 className="text-4xl sm:text-6xl font-serif text-ivory tracking-tight font-light">
               Exceptional Properties.
             </h1>
             <p className="mt-3 text-sm text-ivory-muted/90 font-sans max-w-xl font-light leading-relaxed">
@@ -180,10 +180,8 @@ export function PropertiesCatalogue() {
         </div>
       </div>
 
-      {/* Filter & Search Console */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10">
         <div className="bg-charcoal border border-graphite-border p-5 lg:p-6 shadow-xl space-y-4">
-          {/* Top Search Bar */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center">
             <div className="lg:col-span-8 relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-500" />
@@ -198,6 +196,7 @@ export function PropertiesCatalogue() {
                 <button
                   onClick={() => setSearchQuery("")}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-ivory"
+                  aria-label="Clear search"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -205,7 +204,6 @@ export function PropertiesCatalogue() {
             </div>
 
             <div className="lg:col-span-4 flex items-center gap-3">
-              {/* Sort selector */}
               <div className="relative flex-1">
                 <select
                   value={sortBy}
@@ -220,7 +218,6 @@ export function PropertiesCatalogue() {
                 <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400 pointer-events-none" />
               </div>
 
-              {/* Saved filter toggle */}
               <button
                 onClick={() => setShowSavedOnly(!showSavedOnly)}
                 className={`px-3 py-3 text-xs border flex items-center gap-1.5 transition-colors whitespace-nowrap ${
@@ -237,9 +234,7 @@ export function PropertiesCatalogue() {
             </div>
           </div>
 
-          {/* Secondary Filter Dropdowns */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-graphite-border/70 text-xs">
-            {/* Location */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-graphite-border/70 text-xs font-sans">
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-stone-400 mb-1">
                 Location
@@ -257,7 +252,6 @@ export function PropertiesCatalogue() {
               </select>
             </div>
 
-            {/* Archetype / Category */}
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-stone-400 mb-1">
                 Archetype
@@ -275,7 +269,6 @@ export function PropertiesCatalogue() {
               </select>
             </div>
 
-            {/* Price Tier */}
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-stone-400 mb-1">
                 Valuation Bracket
@@ -292,7 +285,6 @@ export function PropertiesCatalogue() {
               </select>
             </div>
 
-            {/* Bedrooms */}
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-stone-400 mb-1">
                 Bedrooms
@@ -310,7 +302,6 @@ export function PropertiesCatalogue() {
             </div>
           </div>
 
-          {/* Active Filter Chips & Reset */}
           {activeFiltersCount > 0 && (
             <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-graphite-border/70 text-xs">
               <div className="flex flex-wrap items-center gap-2">
@@ -318,7 +309,7 @@ export function PropertiesCatalogue() {
                 {selectedCity !== "All Locations" && (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-graphite border border-graphite-border text-gold text-[11px]">
                     {selectedCity}
-                    <button onClick={() => setSelectedCity("All Locations")}>
+                    <button onClick={() => setSelectedCity("All Locations")} aria-label="Clear city filter">
                       <X className="w-3 h-3" />
                     </button>
                   </span>
@@ -326,7 +317,7 @@ export function PropertiesCatalogue() {
                 {selectedCategory !== "All Archetypes" && (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-graphite border border-graphite-border text-gold text-[11px]">
                     {selectedCategory}
-                    <button onClick={() => setSelectedCategory("All Archetypes")}>
+                    <button onClick={() => setSelectedCategory("All Archetypes")} aria-label="Clear category filter">
                       <X className="w-3 h-3" />
                     </button>
                   </span>
@@ -334,7 +325,7 @@ export function PropertiesCatalogue() {
                 {priceTier !== "all" && (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-graphite border border-graphite-border text-gold text-[11px]">
                     Price: {priceTier}
-                    <button onClick={() => setPriceTier("all")}>
+                    <button onClick={() => setPriceTier("all")} aria-label="Clear price filter">
                       <X className="w-3 h-3" />
                     </button>
                   </span>
@@ -342,7 +333,7 @@ export function PropertiesCatalogue() {
                 {bedrooms !== "all" && (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-graphite border border-graphite-border text-gold text-[11px]">
                     {bedrooms}+ Beds
-                    <button onClick={() => setBedrooms("all")}>
+                    <button onClick={() => setBedrooms("all")} aria-label="Clear bedroom filter">
                       <X className="w-3 h-3" />
                     </button>
                   </span>
@@ -350,7 +341,7 @@ export function PropertiesCatalogue() {
                 {showSavedOnly && (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-graphite border border-graphite-border text-gold text-[11px]">
                     Saved Only
-                    <button onClick={() => setShowSavedOnly(false)}>
+                    <button onClick={() => setShowSavedOnly(false)} aria-label="Clear saved filter">
                       <X className="w-3 h-3" />
                     </button>
                   </span>
@@ -369,7 +360,6 @@ export function PropertiesCatalogue() {
         </div>
       </div>
 
-      {/* Results Header */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 flex items-center justify-between text-xs text-stone-400 font-sans">
         <div>
           Showing <span className="text-ivory font-medium">{filteredProperties.length}</span> of{" "}
@@ -380,13 +370,12 @@ export function PropertiesCatalogue() {
         </div>
       </div>
 
-      {/* Property Cards Layout */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {filteredProperties.length === 0 ? (
           <div className="py-24 text-center border border-dashed border-graphite-border p-12 bg-charcoal/50">
             <Building className="w-10 h-10 text-stone-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-serif text-ivory mb-2">No Matching Residences Found</h3>
-            <p className="text-xs text-ivory-muted max-w-md mx-auto mb-6">
+            <h3 className="text-2xl font-serif text-ivory mb-2 font-light">No Matching Residences Found</h3>
+            <p className="text-xs text-ivory-muted max-w-md mx-auto mb-6 font-light">
               None of our current public listings match your precise criteria. Our private off-market registry contains additional unlisted estates.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -415,3 +404,5 @@ export function PropertiesCatalogue() {
     </div>
   );
 }
+
+export default PropertiesCatalogue;

@@ -23,7 +23,7 @@ export function GlobalModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-obsidian/85 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-obsidian/70 backdrop-blur-sm animate-fade-in"
       role="dialog"
       aria-modal="true"
     >
@@ -33,14 +33,13 @@ export function GlobalModal() {
         aria-hidden="true"
       />
 
-      <div className="relative w-full max-w-2xl bg-charcoal border border-graphite-border shadow-2xl overflow-hidden z-10 max-h-[90vh] flex flex-col">
-        {/* Top Header */}
+      <div className="relative w-full max-w-2xl bg-[#121212]/95 border border-graphite-border shadow-2xl overflow-hidden z-10 max-h-[90vh] flex flex-col">
         <div className="flex items-center justify-between px-6 py-5 border-b border-graphite-border/80 bg-obsidian">
           <div>
             <span className="text-[10px] font-sans uppercase tracking-[0.25em] text-gold block">
               GARA Private Advisory
             </span>
-            <h3 className="text-xl font-serif text-ivory">
+            <h3 className="text-xl font-serif text-ivory font-light">
               {modal.type === "visit"
                 ? "Schedule Private Inspection"
                 : modal.type === "partnership"
@@ -57,7 +56,6 @@ export function GlobalModal() {
           </button>
         </div>
 
-        {/* Modal Body */}
         <div className="p-6 md:p-8 overflow-y-auto">
           {modal.type === "visit" ? (
             <ScheduleVisitModal property={modal.property} onSuccess={closeModal} />
@@ -69,3 +67,5 @@ export function GlobalModal() {
     </div>
   );
 }
+
+export default GlobalModal;

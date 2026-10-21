@@ -16,7 +16,7 @@ export default function ErrorBoundary({
   }, [error]);
 
   return (
-    <div className="min-h-[80vh] bg-obsidian text-ivory flex items-center justify-center px-6">
+    <div className="min-h-[80vh] bg-transparent text-ivory flex items-center justify-center px-6">
       <div className="max-w-md text-center py-20 p-8 bg-charcoal border border-graphite-border">
         <div className="w-12 h-12 rounded-full bg-red-950/40 border border-red-500/40 flex items-center justify-center mx-auto mb-4 text-red-400">
           <AlertCircle className="w-6 h-6" />

@@ -9,9 +9,10 @@ import { Bookmark, Calendar, FileText, Share2, Check } from "lucide-react";
 
 interface PropertyDetailClientActionsProps {
   property: Property;
+  showPrice?: boolean;
 }
 
-export function PropertyDetailClientActions({ property }: PropertyDetailClientActionsProps) {
+export function PropertyDetailClientActions({ property, showPrice = true }: PropertyDetailClientActionsProps) {
   const { currency, isSaved, toggleSaveProperty, openEnquiryModal, openVisitModal } = useApp();
   const saved = isSaved(property.id);
   const [copied, setCopied] = useState(false);
@@ -34,14 +35,14 @@ export function PropertyDetailClientActions({ property }: PropertyDetailClientAc
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-5 lg:self-end">
-      <div>
+      {showPrice && <div>
         <span className="text-[10px] uppercase tracking-widest text-stone-400 block mb-1">
           Private Acquisition Value
         </span>
         <div className="text-2xl sm:text-4xl font-serif text-gold tracking-tight">
           {formatPrice(property.priceInrCrores, currency, property.priceUsdMillions)}
         </div>
-      </div>
+      </div>}
 
       <div className="flex items-center gap-2.5">
         <Button
@@ -61,7 +62,7 @@ export function PropertyDetailClientActions({ property }: PropertyDetailClientAc
           className="flex items-center gap-2"
         >
           <FileText className="w-3.5 h-3.5" />
-          <span>Request Dossier</span>
+          <span>Download Dossier</span>
         </Button>
 
         <button

@@ -12,7 +12,7 @@ export default function PropertiesPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-obsidian flex items-center justify-center text-gold text-xs uppercase tracking-[0.2em]">
+        <div className="min-h-screen bg-transparent flex items-center justify-center text-gold text-xs uppercase tracking-[0.2em]">
           Loading Curated Portfolio...
         </div>
       }

@@ -11,7 +11,6 @@ import {
   Bookmark,
   ChevronRight,
   ArrowUpRight,
-  PhoneCall,
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -42,12 +41,10 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -70,7 +67,6 @@ export function Header() {
         )}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Brand Logo */}
           <Link href="/" className="group flex items-center gap-2">
             <span className="font-serif tracking-[0.28em] text-xl md:text-2xl font-normal text-ivory group-hover:text-gold transition-colors duration-300">
               GARA
@@ -78,7 +74,6 @@ export function Header() {
             <span className="w-1.5 h-1.5 rounded-full bg-gold transition-transform duration-300 group-hover:scale-125" />
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
@@ -102,9 +97,7 @@ export function Header() {
             })}
           </nav>
 
-          {/* Right Action Suite */}
           <div className="hidden lg:flex items-center gap-5">
-            {/* Currency Switcher */}
             <div className="flex items-center border border-graphite-border bg-charcoal/80 p-0.5 rounded-none text-[11px] font-sans">
               <button
                 onClick={() => setCurrency("INR")}
@@ -132,7 +125,6 @@ export function Header() {
               </button>
             </div>
 
-            {/* Saved properties indicator */}
             {savedIds.length > 0 && (
               <Link
                 href="/properties?filter=saved"
@@ -144,7 +136,6 @@ export function Header() {
               </Link>
             )}
 
-            {/* Private Advisory Button */}
             <Button
               variant="gold"
               size="sm"
@@ -155,9 +146,7 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile Right Controls */}
           <div className="flex items-center gap-3 lg:hidden">
-            {/* Currency toggle for mobile */}
             <button
               onClick={() => setCurrency(currency === "INR" ? "USD" : "INR")}
               className="text-[11px] font-sans border border-graphite-border bg-charcoal px-2.5 py-1 text-gold"
@@ -165,7 +154,6 @@ export function Header() {
               {currency === "INR" ? "₹ INR" : "$ USD"}
             </button>
 
-            {/* Menu Trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-ivory hover:text-gold transition-colors focus:outline-none"
@@ -178,7 +166,6 @@ export function Header() {
         </div>
       </header>
 
-      {/* Full-Screen Mobile Drawer */}
       <div
         className={cn(
           "fixed inset-0 z-50 bg-obsidian/95 backdrop-blur-2xl transition-all duration-500 flex flex-col justify-between p-8 lg:hidden",
@@ -256,3 +243,5 @@ export function Header() {
     </>
   );
 }
+
+export default Header;

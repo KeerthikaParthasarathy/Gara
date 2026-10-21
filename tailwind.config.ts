@@ -49,10 +49,20 @@ const config: Config = {
       animation: {
         "fade-in": "fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "fade-up": "fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "rendition-pan": "renditionPan 700ms cubic-bezier(0.16, 1, 0.3, 1) both",
+        "rendition-editorial": "renditionEditorial 500ms cubic-bezier(0.16, 1, 0.3, 1) both",
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         float: "float 6s ease-in-out infinite",
       },
       keyframes: {
+        renditionPan: {
+          "0%": { opacity: "0.7", transform: "translateX(-2%) scale(1.04)" },
+          "100%": { opacity: "1", transform: "translateX(0) scale(1)" },
+        },
+        renditionEditorial: {
+          "0%": { opacity: "0", transform: "translateY(16px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },

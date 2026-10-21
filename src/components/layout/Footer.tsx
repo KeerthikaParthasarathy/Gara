@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, ShieldCheck, Mail } from "lucide-react";
+import { motion } from "motion/react";
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -17,6 +18,24 @@ export function Footer() {
 
   return (
     <footer className="bg-obsidian-dark border-t border-graphite-border text-ivory-muted font-sans relative overflow-hidden">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-70 filter brightness-110 contrast-105"
+        src="/navigation.mp4"
+      />
+      <div aria-hidden="true" className="absolute inset-0 z-[1] bg-[#090909]/45 backdrop-blur-[2px]" />
+      <motion.div
+        className="relative z-10 text-[#F4F0E8]"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.05 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
       {/* Subtle background ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-gold/5 blur-[120px] pointer-events-none" />
 
@@ -30,12 +49,12 @@ export function Footer() {
             <h3 className="text-2xl md:text-4xl font-serif text-ivory tracking-wide leading-tight">
               Curated perspectives on architecture, private market acquisitions, and exceptional estates.
             </h3>
-            <p className="mt-4 text-sm text-ivory-muted/80 max-w-xl leading-relaxed">
+            <p className="mt-4 text-sm text-[#F4F0E8]/85 max-w-xl leading-relaxed">
               Dispatched quarterly to accredited collectors, institutional partners, and private family offices. Strict privacy guaranteed.
             </p>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="liquid-glass p-4 sm:p-5 lg:col-span-5">
             {subscribed ? (
               <div className="flex items-center gap-3 p-4 bg-charcoal border border-gold/40 text-gold text-xs">
                 <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
@@ -44,7 +63,7 @@ export function Footer() {
             ) : (
               <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
                 <div className="relative flex-1">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-ivory-muted" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F4F0E8]" />
                   <input
                     type="email"
                     value={email}
@@ -56,13 +75,13 @@ export function Footer() {
                 </div>
                 <button
                   type="submit"
-                  className="bg-ivory text-charcoal hover:bg-gold hover:text-obsidian px-6 py-3.5 text-xs uppercase tracking-[0.15em] font-medium transition-all duration-300 whitespace-nowrap"
+                  className="flex items-center justify-center gap-2 bg-ivory px-6 py-3.5 text-xs font-medium uppercase tracking-[0.15em] text-charcoal transition-all duration-300 hover:bg-gold hover:text-obsidian whitespace-nowrap"
                 >
-                  Request Dispatch
+                  Request Dispatch <ArrowUpRight className="h-3.5 w-3.5" />
                 </button>
               </form>
             )}
-            <p className="text-[11px] text-stone-500 mt-2.5">
+            <p className="mt-2.5 text-[11px] text-[#F4F0E8]/70">
               By subscribing, you agree to our confidential advisory terms and privacy policy.
             </p>
           </div>
@@ -80,7 +99,7 @@ export function Footer() {
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-gold" />
             </Link>
-            <p className="text-xs text-ivory-muted/90 leading-relaxed max-w-sm mb-6">
+            <p className="text-xs text-[#F4F0E8] leading-relaxed max-w-sm mb-6">
               GARA is India’s foremost ultra-luxury real estate advisory, curating architectural triumphs across Goa, South Mumbai, Lutyens’ Delhi, Alibaug, and the Himalayan ridges.
             </p>
             <div className="flex items-center gap-2 text-xs text-gold border border-gold/20 bg-gold/5 px-3 py-2 max-w-fit">
@@ -170,19 +189,19 @@ export function Footer() {
             <div className="space-y-4 text-xs">
               <div>
                 <p className="text-ivory font-medium">South Mumbai</p>
-                <p className="text-stone-400 text-[11px]">One BKC, Bandra Kurla Complex</p>
+                <p className="text-[#F4F0E8]/75 text-[11px]">One BKC, Bandra Kurla Complex</p>
               </div>
               <div>
                 <p className="text-ivory font-medium">New Delhi</p>
-                <p className="text-stone-400 text-[11px]">Golf Links / Amrita Shergill Marg</p>
+                <p className="text-[#F4F0E8]/75 text-[11px]">Golf Links / Amrita Shergill Marg</p>
               </div>
               <div>
                 <p className="text-ivory font-medium">Goa & Coastal</p>
-                <p className="text-stone-400 text-[11px]">Assagao Heritage Quarter</p>
+                <p className="text-[#F4F0E8]/75 text-[11px]">Assagao Heritage Quarter</p>
               </div>
               <div>
                 <p className="text-ivory font-medium">Bengaluru</p>
-                <p className="text-stone-400 text-[11px]">Sadashivnagar & Indiranagar</p>
+                <p className="text-[#F4F0E8]/75 text-[11px]">Sadashivnagar & Indiranagar</p>
               </div>
             </div>
           </div>
@@ -190,8 +209,8 @@ export function Footer() {
       </div>
 
       {/* Bottom Legal / RERA Bar */}
-      <div className="border-t border-graphite-border/70 py-8 bg-black">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-stone-500">
+      <div className="border-t border-graphite-border/70 bg-[#090909]/35 py-8 backdrop-blur-[2px]">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-[11px] text-[#F4F0E8]/75 md:flex-row md:px-12">
           <div>
             © {new Date().getFullYear()} GARA Real Estate Advisory LLP. All rights reserved.
           </div>
@@ -202,11 +221,12 @@ export function Footer() {
             <Link href="/terms" className="hover:text-gold transition-colors">
               Terms & Conditions
             </Link>
-            <span className="text-stone-600">|</span>
+            <span className="text-[#F4F0E8]/55">|</span>
             <span>RERA Registered Agent: MahaRERA / GoaRERA / DelhiRERA</span>
           </div>
         </div>
       </div>
+      </motion.div>
     </footer>
   );
 }

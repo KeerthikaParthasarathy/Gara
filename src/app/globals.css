@@ -1,6 +1,116 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Helvetica Regular";
+  src: url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.eot");
+  src: url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.eot?#iefix") format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.woff2") format("woff2"),
+    url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.woff") format("woff"),
+    url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.ttf") format("truetype"),
+    url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.svg#Helvetica Regular") format("svg");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Helvetica Regular", sans-serif;
+  --font-serif: var(--font-cinzel), Georgia, serif;
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-editorial: var(--font-playfair), "Playfair Display", serif;
+
+  --color-obsidian: #090909;
+  --color-obsidian-dark: #050505;
+  --color-obsidian-light: #111111;
+  --color-charcoal: #141414;
+  --color-charcoal-light: #1a1a1a;
+  --color-charcoal-dark: #0f0f0f;
+  --color-graphite: #1d1d1d;
+  --color-graphite-border: #303030;
+  --color-graphite-hover: #252525;
+  --color-gold: #c6a76a;
+  --color-gold-soft: #e1cc9b;
+  --color-gold-dark: #a38647;
+  --color-gold-muted: rgba(198, 167, 106, 0.15);
+  --color-ivory: #f4f0e8;
+  --color-ivory-muted: #a7a39b;
+  --color-ivory-dark: #171717;
+
+  --tracking-widest_luxury: 0.25em;
+  --tracking-subtle: 0.05em;
+
+  --animate-fade-in: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-up: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-rendition-pan: renditionPan 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-rendition-editorial: renditionEditorial 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes renditionPan {
+  from { opacity: 0.7; transform: translateX(-2%) scale(1.04); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes renditionEditorial {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Reusable champagne-edged liquid glass surface. */
+.liquid-glass {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: none;
+  background: rgba(255, 255, 255, 0.015);
+  background-blend-mode: luminosity;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.liquid-glass::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  padding: 1.4px;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(198, 167, 106, 0.45) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.2) 80%,
+    rgba(198, 167, 106, 0.45) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  content: "";
+  pointer-events: none;
+}
+
+.liquid-glass > * {
+  position: relative;
+  z-index: 1;
+}
 
 :root {
   --background: #090909;
@@ -94,3 +204,23 @@ body {
   background-size: 200% 100%;
   animation: luxuryShimmer 4s infinite linear;
 }
+
+@keyframes collectionMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.collection-marquee-track {
+  animation: collectionMarquee 48s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collection-marquee-track {
+    animation-play-state: paused;
+  }
+}
+

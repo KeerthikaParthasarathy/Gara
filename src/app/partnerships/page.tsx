@@ -1,8 +1,60 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
-import { Building2, ShieldCheck, CheckCircle2, AlertCircle, Loader2, Globe, Users } from "lucide-react";
+import {
+  Building2,
+  ShieldCheck,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  Globe,
+  Users,
+  ArrowUpRight,
+  Sparkles,
+} from "lucide-react";
+
+const VERIFIED_DEVELOPMENTS = [
+  {
+    title: "The Oberoi Sky Penthouse",
+    developer: "Oberoi Realty",
+    location: "Worli Sea Face, Mumbai",
+    type: "Sky Mansion",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1400&auto=format&fit=crop",
+    slug: "the-oberoi-sky-penthouse",
+    scale: "11,500 sq.ft · 68th–70th Levels",
+  },
+  {
+    title: "The Vayu Sanctuary",
+    developer: "Vayu Architectural Studio",
+    location: "Nerul Riverfront, Goa",
+    type: "Luxury Villa",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400&auto=format&fit=crop",
+    slug: "the-vayu-sanctuary",
+    scale: "14,200 sq.ft · 1.85 Acres Waterfront",
+  },
+  {
+    title: "Amaltas Estate",
+    developer: "Sovereign Heritage Practice",
+    location: "Amrita Shergill Marg, Delhi",
+    type: "Heritage Residence",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1400&auto=format&fit=crop",
+    slug: "amaltas-estate",
+    scale: "18,000 sq.ft · 2.2 Centennial Acres",
+  },
+  {
+    title: "Aura Mar Vista",
+    developer: "Aurelia Coastal Living LLP",
+    location: "Mandwa Coastline, Alibaug",
+    type: "Coastal Estate",
+    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1400&auto=format&fit=crop",
+    slug: "aura-mar-vista",
+    scale: "12,000 sq.ft · Private Helipad Grounds",
+  },
+];
 
 export default function PartnershipsPage() {
   const [formData, setFormData] = useState({
@@ -50,35 +102,103 @@ export default function PartnershipsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-obsidian text-ivory pt-28 pb-32">
-      {/* Intro Header */}
+    <div className="min-h-screen bg-transparent text-ivory pt-28 pb-32">
       <section className="max-w-7xl mx-auto px-6 md:px-12 mb-20">
-        <div className="max-w-3xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl"
+        >
           <div className="flex items-center gap-3 mb-4">
             <span className="w-6 h-[1px] bg-gold" />
             <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-gold font-medium">
               Institutional & Master Developer Practice
             </span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-serif text-ivory tracking-tight leading-[1.1] mb-6">
+          <h1 className="text-4xl sm:text-6xl font-serif text-ivory tracking-tight leading-[1.1] mb-6 font-light">
             Developer <br />
-            <span className="italic font-light text-gold-soft">Partnerships.</span>
+            <span className="italic font-normal text-gold-soft">Partnerships.</span>
           </h1>
           <p className="text-base sm:text-lg text-ivory-muted/90 font-sans font-light leading-relaxed">
             GARA represents India’s most visionary residential creators. We provide end-to-end global positioning, brand storytelling, and discrete private treaty syndicate marketing for world-class developments.
           </p>
+        </motion.div>
+      </section>
+
+      <section id="showcase" className="max-w-7xl mx-auto px-6 md:px-12 mb-24">
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-graphite-border/70">
+          <div>
+            <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-gold block mb-1">
+              Curated Portfolio
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-serif text-ivory font-light">
+              Represented Developments
+            </h2>
+          </div>
+          <Link
+            href="/properties"
+            className="group inline-flex items-center gap-2 text-xs uppercase tracking-wider text-gold hover:text-gold-soft transition-colors font-sans"
+          >
+            <span>Complete Catalogue</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {VERIFIED_DEVELOPMENTS.map((item, idx) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="group bg-charcoal border border-graphite-border hover:border-gold/50 transition-all duration-500 overflow-hidden flex flex-col justify-between"
+            >
+              <div className="relative aspect-[16/11] overflow-hidden bg-obsidian">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+                <span className="absolute top-3 left-3 text-[9px] uppercase tracking-wider text-ivory bg-obsidian/85 px-2 py-0.5 border border-graphite-border">
+                  {item.type}
+                </span>
+              </div>
+              <div className="p-5 flex flex-col justify-between flex-1">
+                <div>
+                  <span className="text-[10px] uppercase font-sans tracking-widest text-gold block mb-1">
+                    {item.developer}
+                  </span>
+                  <Link href={`/properties/${item.slug}`} className="block group-hover:text-gold transition-colors">
+                    <h3 className="font-serif text-base text-ivory line-clamp-1">{item.title}</h3>
+                  </Link>
+                  <p className="text-[11px] text-stone-400 font-sans mt-1">{item.location}</p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-graphite-border/70 flex items-center justify-between text-[10px] text-stone-400 font-sans">
+                  <span>{item.scale}</span>
+                  <Link href={`/properties/${item.slug}`} className="text-gold hover:underline">
+                    Dossier
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Main Grid: Form + Agency Value Pillars */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12">
+      <section id="dossier" className="max-w-7xl mx-auto px-6 md:px-12 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Form */}
           <div className="lg:col-span-7 bg-charcoal border border-graphite-border p-8 md:p-10 shadow-2xl">
             <div className="mb-8 pb-4 border-b border-graphite-border/70 flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-serif text-ivory">Project Representation Dossier</h3>
-                <p className="text-xs text-stone-400 font-sans">Submit your development for GARA curatorial review</p>
+                <h3 className="text-xl font-serif text-ivory font-light">Project Representation Dossier</h3>
+                <p className="text-xs text-stone-400 font-sans mt-0.5">
+                  Submit your development for GARA curatorial review
+                </p>
               </div>
               <Building2 className="w-5 h-5 text-gold" />
             </div>
@@ -88,7 +208,8 @@ export default function PartnershipsPage() {
                 <CheckCircle2 className="w-12 h-12 text-gold mx-auto mb-4" />
                 <h4 className="text-2xl font-serif text-ivory mb-2">Dossier Registered</h4>
                 <p className="text-xs text-stone-300 max-w-md mx-auto mb-6 leading-relaxed">
-                  Thank you, <span className="text-ivory font-medium">{formData.fullName}</span> from <span className="text-gold font-medium">{formData.companyName}</span>. Our Institutional Practice Director will contact your office within 24 hours to execute a mutual NDA and arrange a project briefing.
+                  Thank you, <span className="text-ivory font-medium">{formData.fullName}</span> from{" "}
+                  <span className="text-gold font-medium">{formData.companyName}</span>. Our Institutional Practice Director will contact your office within 24 hours to execute a mutual NDA and arrange a project briefing.
                 </p>
                 <div className="p-3 bg-charcoal border border-graphite-border text-[11px] text-stone-400">
                   Institutional Reference: GARA-DEV-{Date.now().toString(36).toUpperCase()}
@@ -261,13 +382,12 @@ export default function PartnershipsPage() {
             )}
           </div>
 
-          {/* Right Column: Institutional Benefits */}
-          <div className="lg:col-span-5 space-y-6">
+          <div id="institutional" className="lg:col-span-5 space-y-6">
             <div className="p-8 bg-charcoal border border-graphite-border">
               <span className="text-[10px] uppercase font-sans tracking-[0.2em] text-gold block mb-2">
                 The GARA Advantage
               </span>
-              <h3 className="text-xl font-serif text-ivory mb-6">
+              <h3 className="text-xl font-serif text-ivory mb-6 font-light">
                 Why Master Developers Partner with GARA
               </h3>
 
@@ -308,6 +428,29 @@ export default function PartnershipsPage() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div id="criteria" className="p-8 bg-charcoal border border-graphite-border">
+              <span className="text-[10px] uppercase font-sans tracking-[0.2em] text-gold block mb-2">
+                Portfolio Threshold
+              </span>
+              <h3 className="text-base font-serif text-ivory mb-4">
+                Curatorial Acceptance Criteria
+              </h3>
+              <ul className="space-y-3 text-xs text-stone-400 font-sans">
+                <li className="flex items-start gap-2.5">
+                  <span className="text-gold font-serif text-xs">01</span>
+                  <span>Unencumbered freehold legal title with clear RERA certification.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-gold font-serif text-xs">02</span>
+                  <span>Architectural design lead by recognized national or international masters.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-gold font-serif text-xs">03</span>
+                  <span>Low-density spatial layout with private grounds or sovereign floorplates.</span>
+                </li>
+              </ul>
             </div>
 
             <div className="p-6 bg-obsidian border border-graphite-border text-xs text-stone-400 space-y-2">

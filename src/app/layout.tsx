@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Cormorant_Garamond, Cinzel } from "next/font/google";
+import { Manrope, Cormorant_Garamond, Cinzel, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import { Header } from "@/components/layout/Header";
@@ -23,6 +23,13 @@ const cinzel = Cinzel({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-cinzel",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
@@ -81,13 +88,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${cormorant.variable} ${cinzel.variable}`}>
-      <body className="bg-obsidian text-ivory font-sans selection:bg-gold selection:text-obsidian min-h-screen flex flex-col">
+    <html lang="en" className={`${manrope.variable} ${cormorant.variable} ${cinzel.variable} ${playfair.variable}`}>
+      <body className="relative min-h-screen overflow-x-hidden bg-[#090909] font-sans text-[#F4F0E8] selection:bg-gold selection:text-obsidian flex flex-col">
+        <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 h-full w-full overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover filter brightness-[0.87] contrast-[1.08] opacity-38"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260815_030633_1712fc71-4979-4e14-98f9-9f95702ab3da.mp4"
+          />
+          <div className="absolute inset-0 bg-[#090909]/68 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(198,167,106,0.05)_0,transparent_100%)]" />
+        </div>
         <AppProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <GlobalModal />
+          <div className="relative z-10 flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <GlobalModal />
+          </div>
         </AppProvider>
       </body>
     </html>

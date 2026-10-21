@@ -11,6 +11,7 @@ export const PROPERTIES: Property[] = [
     status: "Exclusive Representation",
     featured: true,
     priceInrCrores: 68.5,
+    walkthroughVideo: "/hero-drone.mp4",
     priceUsdMillions: 8.2,
     location: {
       city: "Nerul & Candolim",
