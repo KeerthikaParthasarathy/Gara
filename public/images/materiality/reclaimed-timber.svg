@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+  <defs><linearGradient id="wood" x2="1" y2=".15"><stop stop-color="#24150f"/><stop offset=".48" stop-color="#755039"/><stop offset="1" stop-color="#352017"/></linearGradient><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".018 .22" numOctaves="2" seed="8"/><feColorMatrix values=".45 0 0 0 .12 .28 0 0 0 .07 .16 0 0 0 .03 0 0 0 .32 0"/></filter></defs>
+  <rect width="900" height="1200" fill="url(#wood)"/><rect width="900" height="1200" filter="url(#grain)" opacity=".48"/><path d="M175 0c-35 210 45 360 0 580s55 390 5 620M640 0c-28 210 30 370-8 570s38 400 0 630" fill="none" stroke="#d1a77a" stroke-opacity=".2" stroke-width="8"/><path d="M0 395c200-18 245 28 442 2s300-22 458 4M0 845c240 30 300-24 510 0s270 18 390-2" fill="none" stroke="#170d09" stroke-opacity=".4" stroke-width="5"/>
+</svg>

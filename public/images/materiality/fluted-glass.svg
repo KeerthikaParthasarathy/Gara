@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+  <defs><linearGradient id="glass" x2="1"><stop stop-color="#243c3b"/><stop offset=".5" stop-color="#a8c0b6"/><stop offset="1" stop-color="#344c48"/></linearGradient><linearGradient id="light" x2="1"><stop stop-color="#fff" stop-opacity="0"/><stop offset=".48" stop-color="#fff" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+  <rect width="900" height="1200" fill="url(#glass)"/><g fill="url(#light)" stroke="#dbe7dc" stroke-opacity=".32" stroke-width="4"><path d="M20 0h90v1200H20zM170 0h90v1200h-90zM320 0h90v1200h-90zM470 0h90v1200h-90zM620 0h90v1200h-90zM770 0h90v1200h-90z"/></g><path d="M0 0h900v1200H0z" fill="none" stroke="#d3c7a9" stroke-opacity=".25" stroke-width="18"/>
+</svg>

@@ -44,7 +44,7 @@ export function FeaturedProperties() {
                       key={`${property.id}-${groupIndex}`}
                       className="group/card relative w-[min(80vw,320px)] shrink-0 snap-start overflow-hidden border border-graphite-border bg-charcoal transition-colors duration-500 hover:border-gold/60 sm:w-[350px]"
                     >
-                      <Link href={`/properties/${property.slug}`} className="block" tabIndex={groupIndex === 1 ? -1 : undefined}>
+                      <Link href={`/properties/${property.slug}`} prefetch={true} className="block" tabIndex={groupIndex === 1 ? -1 : undefined}>
                         <div className="relative aspect-[4/5] overflow-hidden bg-obsidian">
                           <Image src={image} alt={property.title} fill sizes="(max-width: 640px) 80vw, 350px" className="object-cover transition-transform duration-1000 ease-out group-hover/card:scale-105" />
                           <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/15 to-transparent" />

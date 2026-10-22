@@ -95,7 +95,7 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:px-10 md:py-20 lg:px-14 xl:px-20 xl:py-28 2xl:px-28"><Eyebrow>Architectural schematics</Eyebrow><div className="mb-9 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><h2 className="font-serif text-3xl font-light sm:text-4xl">Spatial section &amp; environmental axis</h2><p className="max-w-md text-sm font-light leading-relaxed text-white/70">Longitudinal structure, solar orientation and prevailing wind response are documented as part of the residence&apos;s architectural character.</p></div><ArchitecturalSchematics propertyTitle={property.title} /></section>
 
-      <ArchitectPedigree propertyTitle={property.title} imageUrl="/images/property/architectural-atelier-editorial.png" imageAlt="Architect working over a residence drawing in a contemporary design atelier" />
+      <ArchitectPedigree propertyTitle={property.title} imageUrl="/images/property/architectural-atelier-editorial.jpg" imageAlt="Architect working over a residence drawing in a contemporary design atelier" />
 
       <PropertyWalkthroughPlayer propertyTitle={property.title} posterImage={heroImage?.url} locationLabel={`${property.location.neighborhood}, ${property.location.city}`} cadastralCode={property.specs.reraRegistration ?? property.id.toUpperCase()} description={property.architecturalNarrative} />
 

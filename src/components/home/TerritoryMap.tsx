@@ -305,6 +305,7 @@ export function TerritoryMap() {
                 </span>
                 <Link
                   href={`/properties/${selectedCity.slug}`}
+                  prefetch={true}
                   className="inline-flex items-center justify-center gap-2 border border-gold bg-gold px-6 py-3 font-sans text-xs uppercase tracking-widest text-obsidian transition-all hover:bg-transparent hover:text-ivory"
                 >
                   <span>View Residence</span>

@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { PROPERTIES } from "@/data/properties";
 import { ArrowDown, ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 
 type CollectionPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export function generateStaticParams() {
+  return PROPERTIES.map(({ slug }) => ({ slug }));
+}
 
 const images = {
   hero: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=90&w=2200&auto=format&fit=crop",
@@ -79,6 +85,7 @@ export async function generateMetadata({ params }: CollectionPageProps): Promise
 
 export default async function CollectionDetailPage({ params }: CollectionPageProps) {
   const { slug } = await params;
+  if (PROPERTIES.some((property) => property.slug === slug)) redirect(`/properties/${slug}`);
   const name = propertyName(slug) || "The Residence";
 
   return (

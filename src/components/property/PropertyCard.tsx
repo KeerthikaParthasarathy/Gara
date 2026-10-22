@@ -89,7 +89,7 @@ export function PropertyCard({
               <span>{property.architecturalStyle}</span>
             </div>
 
-            <Link href={`/properties/${property.slug}`} className="block group-hover:text-gold transition-colors duration-300">
+            <Link href={`/properties/${property.slug}`} prefetch={true} className="block group-hover:text-gold transition-colors duration-300">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-ivory tracking-tight mb-4 font-light">
                 {property.title}
               </h3>
@@ -136,6 +136,7 @@ export function PropertyCard({
 
             <Link
               href={`/properties/${property.slug}`}
+              prefetch={true}
               className="group/btn inline-flex items-center gap-2 border-b border-gold/50 pb-1.5 text-xs uppercase tracking-[0.18em] text-ivory hover:text-gold hover:border-gold transition-all duration-300 font-sans"
             >
               <span>Explore Dossier</span>
@@ -198,7 +199,7 @@ export function PropertyCard({
             {property.architecturalStyle}
           </div>
 
-          <Link href={`/properties/${property.slug}`} className="block group-hover:text-gold transition-colors duration-300">
+          <Link href={`/properties/${property.slug}`} prefetch={true} className="block group-hover:text-gold transition-colors duration-300">
             <h3 className="text-xl font-serif text-ivory tracking-tight mb-2 line-clamp-1 font-normal">
               {property.title}
             </h3>
@@ -238,6 +239,7 @@ export function PropertyCard({
 
           <Link
             href={`/properties/${property.slug}`}
+            prefetch={true}
             className="group/link inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-ivory-muted hover:text-gold pb-1 border-b border-transparent hover:border-gold transition-all duration-300 font-sans"
             aria-label={`View dossier for ${property.title}`}
           >

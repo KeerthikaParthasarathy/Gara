@@ -15,8 +15,10 @@ function firstSentence(value: string) {
 }
 
 export function PropertyVisualEditorial({ property, images }: { property: Property; images: PropertyImage[] }) {
-  const materialImages = [images[1] ?? images[0], images[2] ?? images[0], images[3] ?? images[0]];
-  const materialStudies = materialImages.map((image, index) => ({ image, material: property.materials[index] ?? image?.caption ?? "Architectural material study" }));
+  const materialStudies = property.materials.map((material) => ({
+    image: { url: materialTexture(material), alt: `${material} architectural material texture` },
+    material,
+  }));
   const statements = property.description.slice(0, 2).map(firstSentence);
   const visual = images[1] ?? images[0];
 
@@ -42,16 +44,29 @@ export function PropertyVisualEditorial({ property, images }: { property: Proper
         </motion.div>
         <div className="overflow-hidden">
           <motion.div drag="x" dragConstraints={{ left: -440, right: 0 }} animate={{ x: [0, -360] }} transition={{ duration: 22, repeat: Infinity, repeatType: "reverse", ease: "linear" }} className="flex w-max cursor-grab gap-4 active:cursor-grabbing">
-          {[...materialStudies, ...materialStudies].map(({ image, material }, index) => <article key={`${material}-${index}`} className="group relative h-[340px] w-[min(76vw,390px)] overflow-hidden border border-[#C6A76A]/20 bg-[#121212]/40">
+          {materialStudies.map(({ image, material }, index) => <article key={material} className="group relative h-[340px] w-[min(76vw,390px)] overflow-hidden border border-[#C6A76A]/20 bg-[#121212]/40">
             {image && <Image src={image.url} alt={image.alt} fill quality={80} sizes="(max-width: 640px) 76vw, 390px" className="object-cover transition-transform duration-1000 group-hover:scale-105" />}
             <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#090909]/90 via-transparent to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6"><span className="inline-flex border border-[#C6A76A]/35 bg-[#090909]/60 px-3 py-2 text-[8px] uppercase tracking-[.16em] text-[#C6A76A] backdrop-blur-md">Material study 0{(index % 3) + 1}</span><p className="mt-3 font-serif text-xl font-light text-[#F4F0E8]">{material}</p></div>
+            <div className="absolute bottom-0 left-0 right-0 p-6"><span className="inline-flex border border-[#C6A76A]/35 bg-[#090909]/60 px-3 py-2 text-[8px] uppercase tracking-[.16em] text-[#C6A76A] backdrop-blur-md">Material study {String(index + 1).padStart(2, "0")}</span><p className="mt-3 font-serif text-xl font-light text-[#F4F0E8]">{material}</p></div>
           </article>)}
           </motion.div>
         </div>
       </section>
     </>
   );
+}
+
+function materialTexture(material: string) {
+  const value = material.toLowerCase();
+  if (/molding|plaster/.test(value)) return "/images/materiality/handcrafted-plaster.svg";
+  if (/teak|timber|wood|oak|ebony|cedar|pine|accoya|millwork/.test(value)) return "/images/materiality/reclaimed-timber.svg";
+  if (/marble/.test(value)) return "/images/materiality/white-marble.svg";
+  if (/travertine/.test(value)) return "/images/materiality/travertine-stone.svg";
+  if (/basalt|black granite|charred|anthracite/.test(value)) return "/images/materiality/dark-stone.svg";
+  if (/glass|glaz/.test(value)) return "/images/materiality/fluted-glass.svg";
+  if (/metal|bronze|steel|titanium|hardware|corten|zinc|brass|platinum/.test(value)) return "/images/materiality/architectural-metal.svg";
+  if (/concrete|microcement/.test(value)) return "/images/materiality/board-formed-concrete.svg";
+  return "/images/materiality/sandstone-masonry.svg";
 }
 
 const categoryLabels: Record<Property["amenities"][number]["category"], string> = {

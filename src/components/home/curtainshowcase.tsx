@@ -26,6 +26,7 @@ export function CurtainShowcase() {
           </div>
           <Link
             href="/properties/the-vayu-sanctuary"
+            prefetch={true}
             className="inline-flex w-fit items-center gap-2 border-b border-gold/60 pb-2 text-[10px] uppercase tracking-[0.18em] text-ivory transition-colors hover:border-gold hover:text-gold-soft font-sans"
           >
             <span>View residence</span>

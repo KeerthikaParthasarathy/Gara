@@ -21,6 +21,8 @@ interface ArchitectPedigreeProps {
   imageAlt?: string;
 }
 
+const DEFAULT_PEDIGREE_IMAGE = "/images/property/architectural-atelier-editorial.jpg";
+
 const DEFAULT_PEDIGREE: ArchitectProfile[] = [
   {
     firm: "Studio Lotus & Morphogenesis",
@@ -51,7 +53,7 @@ const DEFAULT_PEDIGREE: ArchitectProfile[] = [
   },
 ];
 
-export function ArchitectPedigree({ architects = DEFAULT_PEDIGREE, propertyTitle = "This Residence", imageUrl, imageAlt = propertyTitle }: ArchitectPedigreeProps) {
+export function ArchitectPedigree({ architects = DEFAULT_PEDIGREE, propertyTitle = "This Residence", imageUrl = DEFAULT_PEDIGREE_IMAGE, imageAlt = "Architectural atelier and provenance" }: ArchitectPedigreeProps) {
   return (
     <section className="border-y border-[#C6A76A]/20 bg-transparent py-12 text-[#F4F0E8] md:py-20 xl:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-28">
@@ -60,9 +62,9 @@ export function ArchitectPedigree({ architects = DEFAULT_PEDIGREE, propertyTitle
           <p className="max-w-2xl text-sm font-light leading-relaxed text-white/80">A glimpse into the studio disciplines behind enduring architecture. {propertyTitle} is framed here through the craft of drawing, model making, and material study.</p>
         </div>
 
-        <div className="grid overflow-hidden border border-[#C6A76A]/35 bg-[#151515]/80 shadow-[0_0_25px_rgba(198,167,106,0.08)] backdrop-blur-md lg:grid-cols-[.8fr_1.2fr]">
-          <div className="relative m-4 min-h-[340px] overflow-hidden rounded-xl border border-[#C6A76A]/30 bg-[#090909]/50 sm:m-6 sm:min-h-[480px]">
-            {imageUrl && <Image src={imageUrl} alt={imageAlt} fill quality={80} sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />}
+        <div className="grid items-stretch overflow-hidden border border-[#C6A76A]/35 bg-[#151515]/80 shadow-[0_0_25px_rgba(198,167,106,0.08)] backdrop-blur-md lg:grid-cols-[.8fr_1.2fr]">
+          <div className="relative m-4 min-h-[420px] overflow-hidden rounded-xl border border-[#C6A76A]/30 bg-[#090909]/50 sm:m-6 sm:min-h-[480px] lg:h-full lg:min-h-full">
+            <Image src={imageUrl || DEFAULT_PEDIGREE_IMAGE} alt={imageAlt} fill priority={false} quality={80} sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
             <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#090909]/85 via-transparent to-[#090909]/15" />
             <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4"><div><p className="text-[8px] uppercase tracking-[.2em] text-[#C6A76A]">Architectural atelier</p><p className="mt-1 font-serif text-xl font-light">{propertyTitle}</p></div><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#C6A76A]/45 bg-[#090909]/50 text-[#E1CC9B] backdrop-blur-md"><Building2 className="h-5 w-5" /></span></div>
           </div>

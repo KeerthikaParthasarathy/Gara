@@ -375,9 +375,9 @@ export const PROPERTIES: Property[] = [
         caption: "Central sandstone courtyard reflecting classical symmetry"
       },
       {
-        url: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=2000&auto=format&fit=crop",
-        alt: "Makrana marble formal dining room",
-        caption: "Formal dining hall with restored antique coffered ceilings"
+        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=90&w=2400&auto=format&fit=crop",
+        alt: "Formal dining room with pale stone flooring and warm natural light",
+        caption: "Formal dining hall with honed Makrana marble flooring and restored antique coffered ceilings"
       },
       {
         url: "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?q=80&w=2000&auto=format&fit=crop",
