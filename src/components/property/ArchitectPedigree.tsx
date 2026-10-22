@@ -62,14 +62,14 @@ export function ArchitectPedigree({ architects = DEFAULT_PEDIGREE, propertyTitle
           <p className="max-w-2xl text-sm font-light leading-relaxed text-white/80">A glimpse into the studio disciplines behind enduring architecture. {propertyTitle} is framed here through the craft of drawing, model making, and material study.</p>
         </div>
 
-        <div className="grid items-stretch overflow-hidden border border-[#C6A76A]/35 bg-[#151515]/80 shadow-[0_0_25px_rgba(198,167,106,0.08)] backdrop-blur-md lg:grid-cols-[.8fr_1.2fr]">
-          <div className="relative h-full min-h-[420px] max-h-[580px] w-full overflow-hidden rounded-xl border border-[#C6A76A]/30 bg-[#090909]/50">
-            <Image src={imageUrl || DEFAULT_PEDIGREE_IMAGE} alt={imageAlt} fill priority={false} quality={80} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover object-center brightness-[1.02] contrast-[1.05]" />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#090909]/75 via-transparent to-transparent" />
-            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4"><div><p className="text-[8px] uppercase tracking-[.2em] text-[#C6A76A]">Architectural atelier</p><p className="mt-1 font-serif text-xl font-light">{propertyTitle}</p></div><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#C6A76A]/45 bg-[#090909]/50 text-[#E1CC9B] backdrop-blur-md"><Building2 className="h-5 w-5" /></span></div>
+        <div className="grid grid-cols-1 items-start gap-8 border border-[#C6A76A]/35 bg-[#151515]/80 shadow-[0_0_25px_rgba(198,167,106,0.08)] backdrop-blur-md lg:grid-cols-12 lg:gap-12">
+          <div className="relative h-[460px] w-full self-start overflow-hidden rounded-2xl border border-white/10 bg-[#090909]/50 lg:sticky lg:top-24 lg:col-span-5 lg:h-[540px]">
+            <Image src={imageUrl || DEFAULT_PEDIGREE_IMAGE} alt={imageAlt} fill priority={false} quality={80} sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover object-center brightness-[1.02] contrast-[1.05]" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#090909]/80 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute bottom-6 left-6 right-6 flex items-end justify-between"><div><p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#C6A76A]">Architectural Atelier</p><h4 className="mt-1 text-sm font-medium uppercase tracking-wider text-white">{propertyTitle || "Amaltas Estate"}</h4></div></div>
           </div>
 
-          <div className="divide-y divide-white/10">
+          <div className="divide-y divide-white/10 lg:col-span-7">
             {architects.map((architect, index) => <motion.article key={architect.firm} initial={{ y: 18, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: index * 0.08 }} className="border-b border-white/15 p-5 last:border-b-0 sm:p-7">
               <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="mb-2 text-[8px] uppercase tracking-[.18em] text-[#C6A76A]">{architect.role}</p><h3 className="font-serif text-xl font-light text-[#FFFFFF] sm:text-2xl">{architect.firm}</h3></div><span className="font-mono text-[8px] uppercase tracking-[.15em] text-white/65">Atelier 0{index + 1}</span></div>
               <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[10px] text-white/75"><span>{architect.leadArchitect}</span><span>{architect.headquarters}</span></div>
