@@ -63,9 +63,9 @@ export function ArchitectPedigree({ architects = DEFAULT_PEDIGREE, propertyTitle
         </div>
 
         <div className="grid items-stretch overflow-hidden border border-[#C6A76A]/35 bg-[#151515]/80 shadow-[0_0_25px_rgba(198,167,106,0.08)] backdrop-blur-md lg:grid-cols-[.8fr_1.2fr]">
-          <div className="relative m-4 min-h-[420px] overflow-hidden rounded-xl border border-[#C6A76A]/30 bg-[#090909]/50 sm:m-6 sm:min-h-[480px] lg:h-full lg:min-h-full">
-            <Image src={imageUrl || DEFAULT_PEDIGREE_IMAGE} alt={imageAlt} fill priority={false} quality={80} sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#090909]/85 via-transparent to-[#090909]/15" />
+          <div className="relative h-full min-h-[420px] max-h-[580px] w-full overflow-hidden rounded-xl border border-[#C6A76A]/30 bg-[#090909]/50">
+            <Image src={imageUrl || DEFAULT_PEDIGREE_IMAGE} alt={imageAlt} fill priority={false} quality={80} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover object-center brightness-[1.02] contrast-[1.05]" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#090909]/75 via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4"><div><p className="text-[8px] uppercase tracking-[.2em] text-[#C6A76A]">Architectural atelier</p><p className="mt-1 font-serif text-xl font-light">{propertyTitle}</p></div><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#C6A76A]/45 bg-[#090909]/50 text-[#E1CC9B] backdrop-blur-md"><Building2 className="h-5 w-5" /></span></div>
           </div>
 
